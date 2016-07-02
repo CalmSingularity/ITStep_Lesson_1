@@ -1,50 +1,37 @@
 #include <iostream>
-using namespace std;
 
-long long int timestamp = 1464765157274;
+const long long int ms_in_day = 1000 * 60 * 60 * 24;
 
-// Defines if the year is leap or not and returns boolean value
-bool isLeap (int year) {
-  bool leap;
-  
-  if (year % 4 != 0) {
-    // If the year is not evenly divisible by 4, it is not a leap year
-    leap = false;
-  
-  } else if (year % 100 != 0) {
-    // Otherwise, if the year is not evenly divisible by 100, it is not a leap year
-    leap = true;
-  
-  } else if (year % 400 == 0) {
-    // Otherwise, if the year is evenly divisible by 400, it is a leap year
-    leap = true;
-  
+// Defines if the year is leap or not:
+bool isLeap(int year) {
+  if (year % 4 != 0 || (year % 100 == 0 && year % 400 != 0)) {
+    return false;
   } else {
-    // Otherwise, it is a not leap year 
-    leap = false;
+    return true;
   }
-
-  return leap;
 }
 
-
-// Returns the number of milliseconds in a given year
+// Returns the number of milliseconds in a given year:
 long long int msInYear(int year) {
-  long long int ms_in_day = 1000 * 60 * 60 * 24;
-  if (isLeap(year)) return ms_in_day * 366;
-  else return ms_in_day * 365;
+  if (isLeap(year)) {
+    return ms_in_day * 366;
+  } else {
+    return ms_in_day * 365;
+  }
 }
 
-
-// Returns the number of milliseconds in a given month of a given year
+// Returns the number of milliseconds in a given month of a given year:
 long long int msInMonth(int month, int year) {
   long long int ms_in_day = 1000 * 60 * 60 * 24;
   switch (month) {
-    case 2:  
-      if (isLeap(year)) return ms_in_day * 29; 
-      else return ms_in_day * 28;
-      break;
     case 1:  return ms_in_day * 31; break;
+    case 2:  
+      if (isLeap(year)) {
+        return ms_in_day * 29; 
+      } else {
+        return ms_in_day * 28;
+      }
+      break;
     case 3:  return ms_in_day * 31; break;
     case 4:  return ms_in_day * 30; break;
     case 5:  return ms_in_day * 31; break;
@@ -59,11 +46,14 @@ long long int msInMonth(int month, int year) {
 }
 
 
-// Defines current date and time by timestamp in milliseconds
-int main (int argc, char** argv) {
+// Defines current date and time by a timestamp in milliseconds:
+int main(int argc, char** argv) {
 
   int day, month, year, hour, min;
-  long long int ms_in_day = 1000 * 60 * 60 * 24;
+  long long int timestamp;
+  
+  std::cout << "Enter a timestamp in milliseconds: ";
+  std::cin >> timestamp;
 
   // define year
   for (year = 1970; timestamp > msInYear(year); year++) {
@@ -80,30 +70,30 @@ int main (int argc, char** argv) {
   timestamp %= ms_in_day;
 
   // define hour
-  hour = timestamp / (1000*60*60);
-  timestamp %= 1000*60*60;
+  hour = timestamp / (1000 * 60 * 60);
+  timestamp %= 1000 * 60 * 60;
 
   // define min
-  min = timestamp / (1000*60);
-  timestamp %= 1000*60;
+  min = timestamp / (1000 * 60);
+  timestamp %= 1000 * 60;
 
-  // printing resulting date
-  cout << day << " ";
+  // print resulting date
+  std::cout << day << " ";
   switch (month) {
-    case 1:  cout << "January"; break;
-    case 2:  cout << "February"; break;
-    case 3:  cout << "March"; break;
-    case 4:  cout << "April"; break;
-    case 5:  cout << "May"; break;
-    case 6:  cout << "June"; break;
-    case 7:  cout << "July"; break;
-    case 8:  cout << "August"; break;
-    case 9:  cout << "September"; break;
-    case 10: cout << "October"; break;
-    case 11: cout << "November"; break;
-    case 12: cout << "December"; break;
+    case 1:  std::cout << "January"; break;
+    case 2:  std::cout << "February"; break;
+    case 3:  std::cout << "March"; break;
+    case 4:  std::cout << "April"; break;
+    case 5:  std::cout << "May"; break;
+    case 6:  std::cout << "June"; break;
+    case 7:  std::cout << "July"; break;
+    case 8:  std::cout << "August"; break;
+    case 9:  std::cout << "September"; break;
+    case 10: std::cout << "October"; break;
+    case 11: std::cout << "November"; break;
+    case 12: std::cout << "December"; break;
   }
-  cout << " " << year << " " << hour << ":" << min << endl;
+  std::cout << " " << year << " " << hour << ":" << min << "\n";
 
   return 0;
 }

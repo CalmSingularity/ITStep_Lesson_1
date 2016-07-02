@@ -1,15 +1,17 @@
 #include <iostream>
-using namespace std;
 
-// The function calculates a raised to power N using recursion and returns the result
-int raiseToPower(int a, int N) {
-  if (N == 1) return a;
-  int result = raiseToPower(a, N-1) * a;
-  return result;
+// The function calculates a raised to power b using recursion:
+int raiseToPower(int a, int b) {
+  if (b == 1) return a;
+  return raiseToPower(a, b-1) * a;
 }
 
-int main (int argc, char** argv) {
-  int a = 2, N = 8;
-  cout << a << "^" << N << " = " << raiseToPower(a, N) << endl;
+int main(int argc, char** argv) {
+  int a, N;
+  std::cout << "Enter the base (a): ";
+  std::cin >> a;
+  std::cout << "Enter the exponent (N): ";
+  std::cin >> N;
+  std::cout << a << " ^ " << N << " = " << raiseToPower(a, N) << "\n";
   return 0;
 }

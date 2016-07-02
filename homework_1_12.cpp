@@ -1,24 +1,18 @@
 #include <iostream>
-using namespace std;
+#include <cmath>
 
-// Defines the greatest common divisor of a and b
+// Defines the greatest common divisor of a and b using Euclidean algorithm
 int gcd(int a, int b) {
-  
-  if (a == 0) return b;
-  if (b == 0) return a;
-  if (a == b) return a;
-  if (a == 1 || b == 1) return 1;
-  if (a % 2 == 0 && b % 2 == 0) return 2 * gcd(a/2, b/2);
-  if (a % 2 == 0 && b % 2 == 1) return gcd(a/2, b);
-  if (a % 2 == 1 && b % 2 == 0) return gcd(a, b/2);
-  if (a % 2 == 1 && b % 2 == 1) {
-    if (a > b) return gcd(b, (a-b)/2);
-    else return gcd(a, (b-a)/2);
+  if (b == 0) {
+    return std::abs(a);
   }
+  return gcd(b, a % b);
 }
 
-int main (int argc, char** argv) {
-  int a = 75, b = 225;
-  cout << gcd(a, b) << endl;
+int main(int argc, char** argv) {
+  int a, b;
+  std::cout << "Enter a and b: ";
+  std::cin >> a >> b;
+  std::cout << "GCD (" << a << ", " << b << ") = " << gcd(a, b) << "\n";
   return 0;
 }

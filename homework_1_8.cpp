@@ -1,14 +1,14 @@
 #include <iostream>
 #include <cmath>
-using namespace std;
 
-// Converts an integer number N into a hexadecimal format
-int main (int argc, char** argv) {
-  int N = 215;
-  cin >> N;
+// Converts an integer number N into the hexadecimal format
+int main(int argc, char** argv) {
+  int N;
+  std::cout << "Enter an integer number: ";
+  std::cin >> N;
   int remainder = N;
-  int length = floor (log(N)/log(16));
-  char hexadecimal[length];
+  int length = floor(log(N) / log(16));
+  char hexadecimal[256];
 
   for (int i = length; i >= 0; i--) {
     switch (remainder % 16) {
@@ -30,13 +30,15 @@ int main (int argc, char** argv) {
       case 15: hexadecimal[i] = 'F'; break;         
       default: hexadecimal[i] = '-';
     }
-    remainder = floor(remainder/16);
+    remainder = floor(remainder / 16);
   }
 
   // Print hexadecimal result:
-  cout << "0x";
-  for (int i = 0; i <= length; i++) cout << hexadecimal[i];
-  cout << endl;
+  std::cout << N << " in the hexadecimal format: 0x";
+  for (int i = 0; i <= length; i++) {
+    std::cout << hexadecimal[i];
+  }
+  std::cout << "\n";
 
   return 0;
 }

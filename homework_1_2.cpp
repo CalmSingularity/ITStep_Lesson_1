@@ -1,12 +1,11 @@
 #include <iostream>
-using namespace std;
 
-int main (int argc, char** argv) {
+int main(int argc, char** argv) {
   for (int a = 1; a <= 9; a++) {
     for (int b = 1; b <= 9; b++) {
-      cout << a << " * " << b << " = " << (a * b) << endl;
+      std::cout << a << " * " << b << " = " << (a * b) << "\n";
     }
-    cout << endl;
+    std::cout << "\n";
   }
   return 0;
 }

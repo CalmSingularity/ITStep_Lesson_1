@@ -1,37 +1,21 @@
 #include <iostream>
-using namespace std;
 
-int day = 26;
-int month = 06;
-int year = 2016;
-
-// Defines if the year is leap or not and returns boolean value
-bool isLeap (int year) {
-  bool leap;
-  
-  if (year % 4 != 0) {
-    // If the year is not evenly divisible by 4, it is not a leap year
-    leap = false;
-  
-  } else if (year % 100 != 0) {
-    // Otherwise, if the year is not evenly divisible by 100, it is not a leap year
-    leap = true;
-  
-  } else if (year % 400 == 0) {
-    // Otherwise, if the year is evenly divisible by 400, it is a leap year
-    leap = true;
-  
+// Defines if the year is leap or not
+bool isLeap(int year) {
+  if (year % 4 != 0 || (year % 100 == 0 && year % 400 != 0)) {
+    return false;
   } else {
-    // Otherwise, it is a not leap year 
-    leap = false;
+    return true;
   }
-
-  return leap;
 }
 
 
-// Determination of the day of the week
-int main (int argc, char** argv) {
+// Determination of the day of the week using tabular method described here:
+// https://en.wikipedia.org/wiki/Determination_of_the_day_of_the_week
+int main(int argc, char** argv) {
+  int day, month, year;
+  std::cout << "Enter day month year: ";
+  std::cin >> day >> month >> year;
 
   int month_code, year_in_century, century_code, day_of_week;
   year_in_century = year % 100;
@@ -65,14 +49,15 @@ int main (int argc, char** argv) {
   }
 
   day_of_week = (day + month_code + year_in_century + year_in_century/4 + century_code) % 7;
+
   switch (day_of_week) {
-    case 0: cout << "Saturday" << endl; break;
-    case 1: cout << "Sunday" << endl; break;
-    case 2: cout << "Monday" << endl; break;
-    case 3: cout << "Tuesday" << endl; break;
-    case 4: cout << "Wednesday" << endl; break;
-    case 5: cout << "Thursday" << endl; break;
-    case 6: cout << "Friday" << endl; break;
+    case 0: std::cout << "Saturday" << "\n"; break;
+    case 1: std::cout << "Sunday" << "\n"; break;
+    case 2: std::cout << "Monday" << "\n"; break;
+    case 3: std::cout << "Tuesday" << "\n"; break;
+    case 4: std::cout << "Wednesday" << "\n"; break;
+    case 5: std::cout << "Thursday" << "\n"; break;
+    case 6: std::cout << "Friday" << "\n"; break;
   }
 
   return 0;
